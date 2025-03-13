@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const bodyParser = require("body-parser");
+const authMiddleware = require("./middleware/authMiddleware");
 
 dotenv.config();
 connectDB();
@@ -13,6 +14,13 @@ app.use(bodyParser.json()); // To parse incoming JSON requests
 
 app.get("/", (req, res) => {
     res.json({ message: "hi this is working" });
+});
+
+app.get('/profile', authMiddleware, (req, res) => {
+    res.json({
+        "success": "You are seeing this profile",
+        "user": req.user,
+    })
 });
 
 app.use("/api/auth", authRoutes);
