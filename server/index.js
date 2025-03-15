@@ -14,7 +14,9 @@ const app = express();
 app.use(bodyParser.json()); // To parse incoming JSON requests
 
 app.get("/", (req, res) => {
-    res.json({ message: "hi this is working" });
+    res.json({
+        message: "is this working",
+    });
 });
 
 app.use("/api/auth", authRoutes);
