@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
+const postRoutes = require("./routes/postRoutes");
 const bodyParser = require("body-parser");
 
 dotenv.config();
@@ -24,6 +25,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 app.use("/api/events", eventRoutes);
+
+app.use("/api/posts", postRoutes);
 
 const PORT = process.env.PORT || 5000;
 
