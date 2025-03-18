@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import Profile from "./pages/Profile";
 import EventDashboard from "./pages/EventDashboard";
 import EventDetails from "./pages/EventDetails";
+import PostDashboard from "./pages/PostDashboard";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route element={<Layout />}>
                     <Route path="/" element={<EventDashboard />} />
                     <Route path="/events/:id" element={<EventDetails />} />
+                    <Route path="/posts" element={<PostDashboard />} />
                     <Route path="/profile" element={<Profile />} />
                 </Route>
             </Routes>

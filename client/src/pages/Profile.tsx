@@ -40,7 +40,7 @@ export default function Profile() {
                 const token = localStorage.getItem("token");
                 if (!token) {
                     console.error("No token found");
-                    window.open("/login", "_blank"); // Open login in a new tab
+                    navigate("/login");
                     return;
                 }
 
@@ -75,7 +75,7 @@ export default function Profile() {
             const token = localStorage.getItem("token");
             if (!token) {
                 console.error("No token found");
-                window.open("/login", "_blank"); // Open login in a new tab
+                navigate("/login");
                 return;
             }
 
