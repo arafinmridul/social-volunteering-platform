@@ -4,8 +4,11 @@ const User = require('../models/User');
 // @route  GET /api/users/profile
 const getUserProfile = async (req, res) => {
     try {
-        const user = await User.findById(req.user.id).select('-password'); // Exclude password
-        if (!user) return res.status(404).json({ message: 'User not found' });
+        const user = await User.findById(req.user.id)
+            .select("-password") // Exclude password
+            .populate("eventHistory", "title") // Populate eventHistory with event title
+
+        if (!user) return res.status(404).json({ message: "User not found" });
 
         res.status(200).json(user);
     } catch (error) {

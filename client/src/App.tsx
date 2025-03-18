@@ -1,13 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignUp from "./templates/sign-up/SignUp";
 import SignIn from "./templates/sign-in/SignIn";
+import Layout from "./components/Layout";
+import Dashboard from "./components/Dashboard";
+import Profile from "./pages/Profile";
 
 function App() {
     return (
         <Router>
             <Routes>
+                {/* Auth Pages (No MiniDrawer) */}
                 <Route path="/login" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
+
+                {/* Protected Pages (With MiniDrawer) */}
+                <Route element={<Layout />}>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/profile" element={<Profile />} />
+                </Route>
             </Routes>
         </Router>
     );
