@@ -62,7 +62,11 @@ export default function EventDashboard() {
     const handleCreateEvent = async () => {
         try {
             const token = localStorage.getItem("token");
-            if (!token) throw new Error("No token found");
+            if (!token) {
+                console.error("No token found");
+                window.open("/login", "_blank"); // Open login in a new tab
+                return;
+            }
 
             await axios.post("/api/events", newEvent, {
                 headers: { Authorization: `Bearer ${token}` },
@@ -95,7 +99,11 @@ export default function EventDashboard() {
     const handleJoinEvent = async (eventId: string) => {
         try {
             const token = localStorage.getItem("token");
-            if (!token) throw new Error("No token found");
+            if (!token) {
+                console.error("No token found");
+                window.open("/login", "_blank"); // Open login in a new tab
+                return;
+            }
 
             await axios.post(
                 `/api/events/${eventId}/join`,

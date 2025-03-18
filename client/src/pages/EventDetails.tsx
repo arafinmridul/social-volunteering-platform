@@ -78,7 +78,11 @@ export default function EventDetails() {
     const handleJoinEvent = async () => {
         try {
             const token = localStorage.getItem("token");
-            if (!token) throw new Error("No token found");
+            if (!token) {
+                console.error("No token found");
+                window.open("/login", "_blank"); // Open login in a new tab
+                return;
+            }
 
             await axios.post(
                 `/api/events/${id}/join`,
@@ -105,7 +109,11 @@ export default function EventDetails() {
     const handleEditEvent = async () => {
         try {
             const token = localStorage.getItem("token");
-            if (!token) throw new Error("No token found");
+            if (!token) {
+                console.error("No token found");
+                window.open("/login", "_blank"); // Open login in a new tab
+                return;
+            }
 
             await axios.put(`/api/events/${id}`, updatedEvent, {
                 headers: { Authorization: `Bearer ${token}` },
@@ -134,7 +142,11 @@ export default function EventDetails() {
     const handleDeleteEvent = async () => {
         try {
             const token = localStorage.getItem("token");
-            if (!token) throw new Error("No token found");
+            if (!token) {
+                console.error("No token found");
+                window.open("/login", "_blank"); // Open login in a new tab
+                return;
+            }
 
             await axios.delete(`/api/events/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
