@@ -47,16 +47,8 @@ export default function Profile() {
                 setUser(res.data);
             } catch (error: any) {
                 console.error("Error fetching profile:", error);
-
-                // If unauthorized (401) or forbidden (403), redirect to login
-                if (
-                    error.response &&
-                    error.response.status >= 400 &&
-                    error.response.status < 500
-                ) {
-                    localStorage.removeItem("token"); // Clear token
-                    navigate("/login");
-                }
+                navigate("/login");
+                localStorage.removeItem("token"); // Clear token
             }
         };
 
@@ -87,15 +79,8 @@ export default function Profile() {
             setIsEditDialogOpen(false);
         } catch (error: any) {
             console.error("Error updating profile:", error);
-
-            if (
-                error.response &&
-                error.response.status >= 400 &&
-                error.response.status < 500
-            ) {
-                localStorage.removeItem("token"); // Clear token
-                navigate("/login");
-            }
+            localStorage.removeItem("token"); // Clear token
+            navigate("/login");
         }
     };
 
