@@ -3,6 +3,7 @@ import SignUp from "./templates/sign-up/SignUp";
 import SignIn from "./templates/sign-in/SignIn";
 import Layout from "./components/Layout";
 import Dashboard from "./components/Dashboard";
+import Profile from "./pages/Profile";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 {/* Protected Pages (With MiniDrawer) */}
                 <Route element={<Layout />}>
                     <Route path="/" element={<Dashboard />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Route>
             </Routes>
         </Router>
