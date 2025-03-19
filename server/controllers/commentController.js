@@ -15,7 +15,10 @@ const addComment = async (req, res) => {
         post.comments.push(newComment._id);
         await post.save();
 
-        res.status(201).json(newComment);
+        // Populate the userId field before sending the response
+        const populatedComment = await newComment.populate('userId', 'name');
+
+        res.status(201).json(populatedComment);
     } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
