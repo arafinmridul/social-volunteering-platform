@@ -16,8 +16,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import EventIcon from "@mui/icons-material/Event"; // Icon for Events
+import ArticleIcon from "@mui/icons-material/Article"; // Icon for Posts
+import AccountCircleIcon from "@mui/icons-material/AccountCircle"; // Icon for Profile
+import LogoutIcon from "@mui/icons-material/Logout"; // Icon for Logout
+import LoginIcon from "@mui/icons-material/Login"; // Icon for Login
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -96,6 +100,7 @@ interface MiniDrawerProps {
 export default function MiniDrawer({ children }: MiniDrawerProps) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -104,6 +109,14 @@ export default function MiniDrawer({ children }: MiniDrawerProps) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const handleLogout = () => {
+        navigate("/"); // Redirects to homepage
+        localStorage.removeItem("token");
+        window.location.reload(); // Reloads the page
+    };
+
+    const isLoggedIn = !!localStorage.getItem("token"); // Check if token exists
 
     return (
         <Box sx={{ display: "flex" }}>
@@ -126,7 +139,13 @@ export default function MiniDrawer({ children }: MiniDrawerProps) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="div"
+                        sx={{ cursor: "pointer" }}
+                        onClick={() => navigate("/")} // Navigate to homepage
+                    >
                         Social Volunteering Platform
                     </Typography>
                 </Toolbar>
@@ -143,53 +162,91 @@ export default function MiniDrawer({ children }: MiniDrawerProps) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {["Inbox", "Starred", "Send email", "Drafts"].map(
-                        (text, index) => (
-                            <ListItem
-                                key={text}
-                                disablePadding
-                                sx={{ display: "block" }}
+                    {/* Events */}
+                    <ListItem disablePadding sx={{ display: "block" }}>
+                        <ListItemButton
+                            onClick={() => navigate("/")}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? "initial" : "center",
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : "auto",
+                                    justifyContent: "center",
+                                }}
                             >
-                                <ListItemButton
-                                    sx={{
-                                        minHeight: 48,
-                                        justifyContent: open
-                                            ? "initial"
-                                            : "center",
-                                        px: 2.5,
-                                    }}
-                                >
-                                    <ListItemIcon
-                                        sx={{
-                                            minWidth: 0,
-                                            mr: open ? 3 : "auto",
-                                            justifyContent: "center",
-                                        }}
-                                    >
-                                        {index % 2 === 0 ? (
-                                            <InboxIcon />
-                                        ) : (
-                                            <MailIcon />
-                                        )}
-                                    </ListItemIcon>
-                                    <ListItemText
-                                        primary={text}
-                                        sx={{ opacity: open ? 1 : 0 }}
-                                    />
-                                </ListItemButton>
-                            </ListItem>
-                        )
-                    )}
+                                <EventIcon />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary="Events"
+                                sx={{ opacity: open ? 1 : 0 }}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+
+                    {/* Posts */}
+                    <ListItem disablePadding sx={{ display: "block" }}>
+                        <ListItemButton
+                            onClick={() => navigate("/posts")}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? "initial" : "center",
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : "auto",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <ArticleIcon />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary="Posts"
+                                sx={{ opacity: open ? 1 : 0 }}
+                            />
+                        </ListItemButton>
+                    </ListItem>
+
+                    {/* Profile */}
+                    <ListItem disablePadding sx={{ display: "block" }}>
+                        <ListItemButton
+                            onClick={() => navigate("/profile")}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? "initial" : "center",
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : "auto",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <AccountCircleIcon />
+                            </ListItemIcon>
+                            <ListItemText
+                                primary="Profile"
+                                sx={{ opacity: open ? 1 : 0 }}
+                            />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
                 <Divider />
                 <List>
-                    {["All mail", "Trash", "Spam"].map((text, index) => (
-                        <ListItem
-                            key={text}
-                            disablePadding
-                            sx={{ display: "block" }}
-                        >
+                    {/* Conditional Login/Logout */}
+                    {isLoggedIn ? (
+                        <ListItem disablePadding sx={{ display: "block" }}>
                             <ListItemButton
+                                onClick={handleLogout}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? "initial" : "center",
@@ -203,19 +260,40 @@ export default function MiniDrawer({ children }: MiniDrawerProps) {
                                         justifyContent: "center",
                                     }}
                                 >
-                                    {index % 2 === 0 ? (
-                                        <InboxIcon />
-                                    ) : (
-                                        <MailIcon />
-                                    )}
+                                    <LogoutIcon />
                                 </ListItemIcon>
                                 <ListItemText
-                                    primary={text}
+                                    primary="Logout"
                                     sx={{ opacity: open ? 1 : 0 }}
                                 />
                             </ListItemButton>
                         </ListItem>
-                    ))}
+                    ) : (
+                        <ListItem disablePadding sx={{ display: "block" }}>
+                            <ListItemButton
+                                onClick={() => navigate("/login")}
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? "initial" : "center",
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : "auto",
+                                        justifyContent: "center",
+                                    }}
+                                >
+                                    <LoginIcon />
+                                </ListItemIcon>
+                                <ListItemText
+                                    primary="Login"
+                                    sx={{ opacity: open ? 1 : 0 }}
+                                />
+                            </ListItemButton>
+                        </ListItem>
+                    )}
                 </List>
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
