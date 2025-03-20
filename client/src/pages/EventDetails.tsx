@@ -80,7 +80,7 @@ export default function EventDetails() {
             const token = localStorage.getItem("token");
             if (!token) {
                 console.error("No token found");
-                window.open("/login", "_blank"); // Open login in a new tab
+                window.open("/login", "_blank");
                 return;
             }
 
@@ -111,7 +111,7 @@ export default function EventDetails() {
             const token = localStorage.getItem("token");
             if (!token) {
                 console.error("No token found");
-                window.open("/login", "_blank"); // Open login in a new tab
+                window.open("/login", "_blank");
                 return;
             }
 
@@ -144,14 +144,14 @@ export default function EventDetails() {
             const token = localStorage.getItem("token");
             if (!token) {
                 console.error("No token found");
-                window.open("/login", "_blank"); // Open login in a new tab
+                window.open("/login", "_blank");
                 return;
             }
 
             await axios.delete(`/api/events/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            navigate("/"); // Redirect to the homepage or events list
+            navigate("/");
         } catch (error: any) {
             if (error.response) {
                 if (error.response.status === 403) {
@@ -225,7 +225,7 @@ export default function EventDetails() {
                         </CardContent>
                         <Box
                             display="flex"
-                            justifyContent="space-between"
+                            justifyContent="flex-start"
                             padding={2}
                         >
                             <Button
@@ -238,22 +238,6 @@ export default function EventDetails() {
                             >
                                 Join Event
                             </Button>
-
-                            <>
-                                <Button
-                                    variant="contained"
-                                    onClick={() => setIsEditDialogOpen(true)}
-                                >
-                                    Edit Event
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    color="error"
-                                    onClick={handleDeleteEvent}
-                                >
-                                    Delete Event
-                                </Button>
-                            </>
                         </Box>
                     </Card>
                 </Grid>
@@ -287,6 +271,30 @@ export default function EventDetails() {
                             )}
                         </CardContent>
                     </Card>
+                    <Box
+                        display="flex"
+                        flexDirection={{ xs: "column", md: "row" }}
+                        justifyContent="space-between"
+                        alignItems="center"
+                        padding={2}
+                        gap={2}
+                    >
+                        <Button
+                            variant="contained"
+                            onClick={() => setIsEditDialogOpen(true)}
+                            fullWidth={true}
+                        >
+                            Edit Event
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="error"
+                            onClick={handleDeleteEvent}
+                            fullWidth={true}
+                        >
+                            Delete Event
+                        </Button>
+                    </Box>
                 </Grid>
             </Grid>
 
