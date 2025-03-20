@@ -38,7 +38,11 @@ export default function Profile() {
         const fetchProfile = async () => {
             try {
                 const token = localStorage.getItem("token");
-                if (!token) throw new Error("No token found");
+                if (!token) {
+                    console.error("No token found");
+                    navigate("/login");
+                    return;
+                }
 
                 const res = await axios.get("/api/users/profile", {
                     headers: { Authorization: `Bearer ${token}` },
@@ -69,7 +73,11 @@ export default function Profile() {
 
         try {
             const token = localStorage.getItem("token");
-            if (!token) throw new Error("No token found");
+            if (!token) {
+                console.error("No token found");
+                navigate("/login");
+                return;
+            }
 
             await axios.put("/api/users/profile", editableUser, {
                 headers: { Authorization: `Bearer ${token}` },

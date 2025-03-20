@@ -5,19 +5,20 @@ import Layout from "./components/Layout";
 import Profile from "./pages/Profile";
 import EventDashboard from "./pages/EventDashboard";
 import EventDetails from "./pages/EventDetails";
+import PostDashboard from "./pages/PostDashboard";
+import PostDetails from "./pages/PostDetails";
 
 function App() {
     return (
         <Router>
             <Routes>
-                {/* Auth Pages (No MiniDrawer) */}
-                <Route path="/login" element={<SignIn />} />
-                <Route path="/signup" element={<SignUp />} />
-
-                {/* Pages (With MiniDrawer) */}
                 <Route element={<Layout />}>
+                    <Route path="/login" element={<SignIn />} />
+                    <Route path="/signup" element={<SignUp />} />
                     <Route path="/" element={<EventDashboard />} />
                     <Route path="/events/:id" element={<EventDetails />} />
+                    <Route path="/posts" element={<PostDashboard />} />
+                    <Route path="/posts/:id" element={<PostDetails />} />
                     <Route path="/profile" element={<Profile />} />
                 </Route>
             </Routes>
