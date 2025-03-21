@@ -35,11 +35,20 @@ A full-stack web application designed to connect volunteers with social causes a
 -   **Responsive Design**: Fully responsive UI for seamless usage across desktop, tablet, and mobile devices.
 -   **RESTful API**: Backend API for managing users, events, posts, and profiles with secure data handling.
 
+## Screenshots
+
+![Signup](https://github.com/user-attachments/assets/2973590e-316b-44bb-a9db-9f37ca16805c)
+![Login](https://github.com/user-attachments/assets/b1d1f68f-39eb-41ba-a7ba-2cd1ec734eae)
+![Profile](https://github.com/user-attachments/assets/902719af-1a18-4e7d-93cd-b10c98d85f5c)
+![Events](https://github.com/user-attachments/assets/4c154dae-5e7e-4d40-9766-5001b6e7dbdc)
+![Event Details](https://github.com/user-attachments/assets/239c4dd1-c8ff-40fb-872a-9a13561a8a25)
+![Event Edit](https://github.com/user-attachments/assets/d8745ae4-7c2a-43c5-8638-1e4c2db27d55)
+![Posts](https://github.com/user-attachments/assets/7b5888de-b62f-4c37-a6fa-247d32e007ab)
+![Post Details](https://github.com/user-attachments/assets/5e1cacd1-a061-4bcd-8d36-c14ee209a2d2)
+
 ## Database Schema Structure
 
-+----------------+ +----------------+ +----------------+ +----------------+
-| User | | Event | | Post | | Comment |
-+----------------+ +----------------+ +----------------+ +----------------+
+![Database Schema](https://github.com/user-attachments/assets/f124294d-ddae-4794-beef-c607bd18b16a)
 
 ## Setup & Installation
 
