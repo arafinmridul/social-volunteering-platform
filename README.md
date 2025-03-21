@@ -80,6 +80,10 @@ Follow these steps to set up the project locally:
         MONGODB_URI=your_mongodb_connection_string
         JWT_SECRET=your_jwt_secret
         ```
+    - Create a `.env` file in the `client` folder with the following:
+        ```
+        VITE_BACKEND_URL=your_backend_url
+        ```
 
 4. Start the development servers:
 
