@@ -48,10 +48,12 @@ export default function PostDetails() {
     });
     const navigate = useNavigate();
 
+    const url = import.meta.env.VITE_BACKEND_URL;
+
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const res = await axios.get(`/api/posts/${id}`);
+                const res = await axios.get(`${url}/api/posts/${id}`);
                 setPost(res.data);
                 setUpdatedPost({
                     title: res.data.title,
@@ -78,7 +80,7 @@ export default function PostDetails() {
             }
 
             const res = await axios.post(
-                `/api/posts/${id}/comments`,
+                `${url}/api/posts/${id}/comments`,
                 { text: newComment },
                 {
                     headers: { Authorization: `Bearer ${token}` },
@@ -107,7 +109,7 @@ export default function PostDetails() {
                 return;
             }
 
-            await axios.put(`/api/posts/${id}`, updatedPost, {
+            await axios.put(`${url}/api/posts/${id}`, updatedPost, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setPost((prevPost) =>
@@ -140,7 +142,7 @@ export default function PostDetails() {
                 return;
             }
 
-            await axios.delete(`/api/posts/${id}`, {
+            await axios.delete(`${url}/api/posts/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             navigate("/posts"); // Redirect to the homepage or posts list

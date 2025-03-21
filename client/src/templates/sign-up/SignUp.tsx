@@ -49,12 +49,14 @@ export default function SignUp(props: { disableCustomTheme?: boolean }) {
 
     const [error, setError] = useState("");
 
+    const url = import.meta.env.VITE_BACKEND_URL;
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setError(""); // Reset error
 
         try {
-            const response = await axios.post("/api/auth/signup", {
+            const response = await axios.post(`${url}/api/auth/signup`, {
                 name,
                 email,
                 password,

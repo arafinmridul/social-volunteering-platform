@@ -77,12 +77,14 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
         return isValid;
     };
 
+    const url = import.meta.env.VITE_BACKEND_URL;
+
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!validateInputs()) return;
 
         try {
-            const response = await axios.post("/api/auth/login", {
+            const response = await axios.post(`${url}/api/auth/login`, {
                 email,
                 password,
             });

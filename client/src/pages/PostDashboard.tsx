@@ -36,10 +36,12 @@ export default function PostDashboard() {
     });
     const navigate = useNavigate();
 
+    const url = import.meta.env.VITE_BACKEND_URL;
+
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const res = await axios.get("/api/posts");
+                const res = await axios.get(`${url}/api/posts`);
                 setPosts(res.data);
             } catch (error) {
                 console.error("Error fetching posts:", error);
@@ -60,14 +62,14 @@ export default function PostDashboard() {
                 return;
             }
 
-            await axios.post("/api/posts", newPost, {
+            await axios.post(`${url}/api/posts`, newPost, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setNewPost({ title: "", description: "", urgency: "Low" });
             setIsCreateDialogOpen(false);
 
             // Refresh posts after creating a new one
-            const res = await axios.get("/api/posts");
+            const res = await axios.get(`${url}/api/posts`);
             setPosts(res.data);
         } catch (error) {
             console.error("Error creating post:", error);
