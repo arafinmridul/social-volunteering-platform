@@ -6,12 +6,14 @@ const userRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
 const postRoutes = require("./routes/postRoutes");
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 dotenv.config();
 connectDB();
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json()); // To parse incoming JSON requests
 
 app.get("/", (req, res) => {
