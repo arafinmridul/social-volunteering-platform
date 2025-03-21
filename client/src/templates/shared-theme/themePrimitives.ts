@@ -1,5 +1,20 @@
 import { createTheme, alpha, PaletteMode, Shadows } from '@mui/material/styles';
 
+import { Theme } from '@mui/material/styles';
+
+declare module '@mui/material/styles' {
+  interface Theme {
+    vars?: {
+      [key: string]: any;
+    };
+  }
+  interface ThemeOptions {
+    vars?: {
+      [key: string]: any;
+    };
+  }
+}
+
 declare module '@mui/material/Paper' {
   interface PaperPropsVariantOverrides {
     highlighted: true;
@@ -19,7 +34,7 @@ declare module '@mui/material/styles/createPalette' {
     900: string;
   }
 
-  interface PaletteColor extends ColorRange {}
+  interface PaletteColor extends ColorRange { }
 
   interface Palette {
     baseShadow: string;
