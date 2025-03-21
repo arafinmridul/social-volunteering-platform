@@ -33,6 +33,8 @@ export default function Profile() {
     const [editableUser, setEditableUser] = useState<UserProfile | null>(null);
     const navigate = useNavigate();
 
+    const url = import.meta.env.VITE_BACKEND_URL;
+
     // Fetch user data from backend
     useEffect(() => {
         const fetchProfile = async () => {
@@ -44,7 +46,7 @@ export default function Profile() {
                     return;
                 }
 
-                const res = await axios.get("/api/users/profile", {
+                const res = await axios.get(`${url}/api/users/profile`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
@@ -79,7 +81,7 @@ export default function Profile() {
                 return;
             }
 
-            await axios.put("/api/users/profile", editableUser, {
+            await axios.put(`${url}/api/users/profile`, editableUser, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 

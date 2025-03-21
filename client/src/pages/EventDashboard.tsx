@@ -44,10 +44,12 @@ export default function EventDashboard() {
     });
     const navigate = useNavigate();
 
+    const url = import.meta.env.VITE_BACKEND_URL;
+
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const res = await axios.get("/api/events");
+                const res = await axios.get(`${url}/api/events`);
                 setEvents(res.data);
             } catch (error) {
                 console.error("Error fetching events:", error);
@@ -68,7 +70,7 @@ export default function EventDashboard() {
                 return;
             }
 
-            await axios.post("/api/events", newEvent, {
+            await axios.post(`${url}/api/events`, newEvent, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setNewEvent({
@@ -81,7 +83,7 @@ export default function EventDashboard() {
             });
             setIsCreateDialogOpen(false);
             // Refresh events after creating a new one
-            const res = await axios.get("/api/events");
+            const res = await axios.get(`${url}/api/events`);
             setEvents(res.data);
         } catch (error: any) {
             console.error("Error creating event:", error);
@@ -106,14 +108,14 @@ export default function EventDashboard() {
             }
 
             await axios.post(
-                `/api/events/${eventId}/join`,
+                `${url}/api/events/${eventId}/join`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
             );
             // Optionally refresh events or update state to reflect the change
-            const res = await axios.get("/api/events");
+            const res = await axios.get(`${url}/api/events`);
             setEvents(res.data);
             navigate(`/events/${eventId}`);
         } catch (error: any) {

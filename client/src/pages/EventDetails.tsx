@@ -52,10 +52,12 @@ export default function EventDetails() {
     });
     const navigate = useNavigate();
 
+    const url = import.meta.env.VITE_BACKEND_URL;
+
     useEffect(() => {
         const fetchEvent = async () => {
             try {
-                const res = await axios.get(`/api/events/${id}`);
+                const res = await axios.get(`${url}/api/events/${id}`);
                 setEvent(res.data);
                 setUpdatedEvent({
                     title: res.data.title,
@@ -85,13 +87,13 @@ export default function EventDetails() {
             }
 
             await axios.post(
-                `/api/events/${id}/join`,
+                `${url}/api/events/${id}/join`,
                 {},
                 {
                     headers: { Authorization: `Bearer ${token}` },
                 }
             );
-            const res = await axios.get(`/api/events/${id}`);
+            const res = await axios.get(`${url}/api/events/${id}`);
             setEvent(res.data);
         } catch (error: any) {
             console.error("Error joining event:", error);
@@ -115,7 +117,7 @@ export default function EventDetails() {
                 return;
             }
 
-            await axios.put(`/api/events/${id}`, updatedEvent, {
+            await axios.put(`${url}/api/events/${id}`, updatedEvent, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setEvent((prevEvent) =>
@@ -148,7 +150,7 @@ export default function EventDetails() {
                 return;
             }
 
-            await axios.delete(`/api/events/${id}`, {
+            await axios.delete(`${url}/api/events/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             navigate("/");
