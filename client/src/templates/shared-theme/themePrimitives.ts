@@ -1,7 +1,5 @@
 import { createTheme, alpha, PaletteMode, Shadows } from '@mui/material/styles';
 
-import { Theme } from '@mui/material/styles';
-
 declare module '@mui/material/styles' {
   interface Theme {
     vars?: {
